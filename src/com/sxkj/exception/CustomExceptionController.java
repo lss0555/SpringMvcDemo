@@ -20,15 +20,15 @@ public class CustomExceptionController {
      * 用于处理自定义异常
      * @return
      */
-    @ExceptionHandler({CustomException.class})
-    @ResponseBody
-    public TResult handleException(CustomException e) {
-        return TResultUtils.error(e.getMessage());
-    }
+//    @ExceptionHandler({CustomException.class})
+//    @ResponseBody
+//    public TResult handleException(CustomException e) {
+//        return TResultUtils.error(e.getMessage());
+//    }
 
-    @RequestMapping("test_error")
-    @ResponseBody
-    public void test() {
-        throw new CustomException("出错了！");
-    }
+//    @RequestMapping("test_error")
+//    @ResponseBody
+//    public void test() {
+//        throw new CustomException("出错了！");
+//    }
 }

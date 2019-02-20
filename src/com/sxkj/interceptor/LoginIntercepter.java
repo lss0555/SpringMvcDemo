@@ -10,11 +10,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * 用户登录状态拦截器
  */
 public class LoginIntercepter implements HandlerInterceptor {
+    private List<String> exceptUrls;
+
     /**
      *
      * 该方法将在Controller处理之前进行调用  1298  50  468  295 139 188
@@ -22,12 +25,12 @@ public class LoginIntercepter implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        LoginAuth loginAuth = ((HandlerMethod) o).getMethodAnnotation(LoginAuth.class);
+//        LoginAuth loginAuth = ((HandlerMethod) o).getMethodAnnotation(LoginAuth.class);
 
         //条件刷选,为false的不用拦截判断
-        if (loginAuth != null && !loginAuth.validate()) {
-            return true;
-        }
+//        if (loginAuth != null && !loginAuth.validate()) {
+//            return true;
+//        }
 
         User user = (User) request.getSession().getAttribute("user");
         if(user==null){

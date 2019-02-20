@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestController {
 
     /**
-     * @Description  测试空指针异常
+     * @Description  测试空指针异常  ArithmeticException
      **/
     @RequestMapping("/test_null")
     public String test_null(){
@@ -35,4 +35,23 @@ public class TestController {
 
         return "/login";
     }
+
+
+    /**
+     * @Description  测试url_pattern匹配规则 /  与/*的区别
+     * 这里的url-pattern不能写成/*，因为DispatcherServlet会将向动态页面的跳转请求，
+     * 即向JSP页面的跳转请求也当成一个普通的Controller请求
+     **/
+    @RequestMapping("/loginTest.do")
+    public String test_url_pattern() {
+        return "/login";
+    }
+
+
+        @RequestMapping("test_error")
+    @ResponseBody
+    public void test() {
+        throw new CustomException("出错了！");
+    }
+
 }

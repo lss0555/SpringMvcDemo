@@ -12,10 +12,16 @@ import java.io.IOException;
  * @Author lss0555
  **/
 public class LoginFilter implements Filter {
+    private String excludedPages;
+    private String[] excludedPageArray;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("过滤器初始化...");
+        excludedPages = filterConfig.getInitParameter("excludedPages");
+        if (null != excludedPages && excludedPages.length() > 0) {
+            excludedPageArray = excludedPages.split(",");
+        }
     }
 
     @Override
@@ -29,18 +35,31 @@ public class LoginFilter implements Filter {
         String uri = request.getRequestURI();
         uri = uri.substring(contextPath.length());
         //过滤无需处理的请求
-        if(uri.equals("/user/login")||uri.equals("/user/loginOut")){
-            //通过
-            filterChain.doFilter(servletRequest,servletResponse);
-        }else {
-            User user = (User) request.getSession().getAttribute("user");
-            if (user != null) {
+//        if (uri.equals("/user/login") || uri.equals("/user/loginOut")) {
+//            //通过
+//            filterChain.doFilter(servletRequest, servletResponse);
+//            return;
+//        }
+
+
+        //过滤无需处理的请求
+        for (String page : excludedPageArray) {
+            if(page.equals(uri)){
                 filterChain.doFilter(servletRequest, servletResponse);
-            }else {
-                response.sendRedirect("/user/login");
+                 return;
             }
         }
+
+
+        //拦截处理
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            response.sendRedirect("/user/login");
     }
+
+}
 
     @Override
     public void destroy() {

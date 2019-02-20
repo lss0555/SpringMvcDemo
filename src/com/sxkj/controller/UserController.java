@@ -28,7 +28,7 @@ public class UserController {
     /**
      * @Description  用户登录
      **/
-    @LoginAuth(validate = false)
+//    @LoginAuth(validate = false)
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public TResult login(User user){
@@ -48,7 +48,7 @@ public class UserController {
     /**
      * @Description  登录界面
      **/
-    @LoginAuth(validate = false)
+//    @LoginAuth(validate = false)
     @RequestMapping (value = "/login",method = RequestMethod.GET)
     public String loginPage() {
         return "login";
@@ -74,9 +74,9 @@ public class UserController {
 //     * 用于处理自定义异常
 //     * @return
 //     */
-//    @ExceptionHandler({CustomException.class})
-//    @ResponseBody
-//    public TResult exception(CustomException e) {
-//        return TResultUtils.error(e.getMessage());
-//    }
+    @ExceptionHandler({CustomException.class})
+    @ResponseBody
+    public TResult exception(CustomException e) {
+        return TResultUtils.error(e.getMessage());
+    }
 }

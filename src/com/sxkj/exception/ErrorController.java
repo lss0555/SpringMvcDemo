@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * 错误提示 <br/>
+ * 错误提示
  */
 @Controller
 @RequestMapping(value = "/error")
@@ -33,7 +33,7 @@ public class ErrorController {
     @RequestMapping(value = "/500")
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String error500() {
-        return "505";
+        return "500";
     }
 
     /**

@@ -16,6 +16,7 @@
         <context:include-filter type="regex" expression=".*.service.*" />
     </context:component-scan>
     <!-- 静态资源(js、image等)的访问 -->
+    <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>
     <!--<mvc:annotation-driven/>-->
     <!-- 启用默认配置 -->
     <mvc:annotation-driven>
@@ -48,6 +49,8 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/loginOut"/>
             <bean class="com.sxkj.interceptor.LoginIntercepter"/>
         </mvc:interceptor>
     </mvc:interceptors>

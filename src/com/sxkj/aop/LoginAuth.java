@@ -3,7 +3,7 @@ package com.sxkj.aop;
 import java.lang.annotation.*;
 
 /**
- * @Description  ip权限控制
+ * @Description  登录控制
  **/
 @Documented
 @Inherited
